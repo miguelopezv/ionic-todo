@@ -1,11 +1,21 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  <ion-toolbar color="dark">
     <ion-title>
       To-Do
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<h1>Hola Mundo</h1>
+<ion-content color="dark">
+  <ion-list color="dark">
+    <ion-item color="dark" *ngFor="let list of todoService.lists" detail>
+      <ion-label>{{ list.title }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="addList()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
