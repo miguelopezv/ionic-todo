@@ -6,25 +6,31 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root'
 })
 export class TodoService {
-  lists: List[] = [];
+  lists: List[];
 
   constructor(private storage: Storage) {
     this._loadData();
   }
 
   addList(title: string) {
-    this.lists.push(new List(title));
-    this._saveData();
+    const list = new List(title);
+    this.lists.push(list);
+    this.saveData();
+
+    return list.id;
   }
 
-  private _saveData() {
+  getList(id: number) {
+    return this.lists.find(list => list.id === id);
+  }
+
+  saveData() {
     this.storage.set('lists', this.lists);
   }
 
-  private async _loadData() {
-    this.lists = await this.storage.get('lists');
-    if (!this.lists) {
-      this.lists = [];
-    }
+  private _loadData() {
+    this.storage.get('lists').then(data => {
+      this.lists = data !== null ? data : [];
+    });
   }
 }
