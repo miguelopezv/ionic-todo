@@ -32,7 +32,7 @@ export class Tab1Page {
           handler: data => {
             if (data.title.length) {
               const listId: number = this.todoService.addList(data.title);
-              this.router.navigateByUrl(`/tabs/tab1/add/${listId}`);
+              this.goToList(listId);
             }
           }
         }
@@ -40,5 +40,9 @@ export class Tab1Page {
     });
 
     await alert.present();
+  }
+
+  goToList(listId: number) {
+    this.router.navigateByUrl(`/tabs/tab1/add/${listId}`);
   }
 }

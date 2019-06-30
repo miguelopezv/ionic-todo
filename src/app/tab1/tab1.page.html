@@ -8,8 +8,16 @@
 
 <ion-content color="dark">
   <ion-list color="dark">
-    <ion-item color="dark" *ngFor="let list of todoService.lists" detail>
+    <ion-item
+      color="dark"
+      *ngFor="let list of todoService.lists"
+      (click)="goToList(list.id)"
+      detail
+    >
       <ion-label>{{ list.title }}</ion-label>
+      <ion-note color="tertiary" slot="end"
+        >{{ list.tasks.length }} tasks</ion-note
+      >
     </ion-item>
   </ion-list>
 
