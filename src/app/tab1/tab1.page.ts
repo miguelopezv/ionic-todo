@@ -1,7 +1,8 @@
+import { AlertController } from '@ionic/angular';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TodoService } from '../services/todo.service';
 import { List } from '../models/list.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -10,9 +11,34 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page {
   lists: List[];
-  constructor(public todoService: TodoService, private router: Router) {}
+  constructor(
+    public todoService: TodoService,
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
-  addList() {
-    this.router.navigateByUrl('/tabs/tab1/add');
+  async addList() {
+    const alert = await this.alertController.create({
+      header: 'New List',
+      inputs: [{ name: 'title', type: 'text', placeholder: 'List name' }],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => console.log('cancel')
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            if (data.title.length) {
+              this.todoService.addList(data.title);
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+    // this.router.navigateByUrl('/tabs/tab1/add');
   }
 }
