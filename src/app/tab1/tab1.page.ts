@@ -31,7 +31,8 @@ export class Tab1Page {
           text: 'Save',
           handler: data => {
             if (data.title.length) {
-              this.todoService.addList(data.title);
+              const listId: number = this.todoService.addList(data.title);
+              this.router.navigateByUrl(`/tabs/tab1/add/${listId}`);
             }
           }
         }
@@ -39,6 +40,5 @@ export class Tab1Page {
     });
 
     await alert.present();
-    // this.router.navigateByUrl('/tabs/tab1/add');
   }
 }
