@@ -7,19 +7,7 @@
 </ion-header>
 
 <ion-content color="dark">
-  <ion-list color="dark">
-    <ion-item
-      color="dark"
-      *ngFor="let list of todoService.lists"
-      (click)="goToList(list.id)"
-      detail
-    >
-      <ion-label>{{ list.title }}</ion-label>
-      <ion-note color="tertiary" slot="end"
-        >{{ list.tasks.length }} tasks</ion-note
-      >
-    </ion-item>
-  </ion-list>
+  <app-list [lists]="todoService.lists" (goTo)="goToList($event)"></app-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary" (click)="addList()">
