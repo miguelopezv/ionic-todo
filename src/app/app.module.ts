@@ -19,7 +19,7 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot(),
     // TODO: use sqlite
     IonicStorageModule.forRoot({
-      driverOrder: ['localstorage', 'sqlite']
+      driverOrder: ['sqlite', 'localstorage']
     }),
     AppRoutingModule
   ],
