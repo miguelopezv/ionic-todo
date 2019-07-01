@@ -1,9 +1,15 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  <ion-toolbar color="dark">
     <ion-title>
-      Tab Two
+      Done lists
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content color="dark">
+  <app-list
+    [lists]="todoService.lists | doneFilter: true"
+    (goTo)="goToList($event)"
+    (deleteList)="deleteList($event)"
+  ></app-list>
+</ion-content>
