@@ -16,12 +16,7 @@ const routes: Routes = [
           },
           {
             path: 'add/:id',
-            children: [
-              {
-                path: '',
-                loadChildren: '../add/add.module#AddPageModule'
-              }
-            ]
+            loadChildren: '../add/add.module#AddPageModule'
           }
         ]
       },
@@ -31,6 +26,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab2/tab2.module#Tab2PageModule'
+          },
+          {
+            path: 'add/:id',
+            loadChildren: '../add/add.module#AddPageModule'
           }
         ]
       },
