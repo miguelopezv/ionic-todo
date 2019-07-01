@@ -45,4 +45,8 @@ export class Tab1Page {
   goToList(listId: number) {
     this.router.navigateByUrl(`/tabs/tab1/add/${listId}`);
   }
+
+  deleteList(id: number) {
+    this.todoService.deleteList(id);
+  }
 }
