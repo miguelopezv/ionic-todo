@@ -11,6 +11,7 @@
     [lists]="todoService.lists | doneFilter"
     (goTo)="goToList($event)"
     (deleteList)="deleteList($event)"
+    (editList)="addList($event)"
   ></app-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

@@ -11,26 +11,38 @@ import { List } from '../models/list.model';
 })
 export class Tab1Page {
   lists: List[];
+
   constructor(
     public todoService: TodoService,
     private router: Router,
     private alertController: AlertController
   ) {}
 
-  async addList() {
+  async addList(listConfig?: { list: List; listElement: any }) {
     const alert = await this.alertController.create({
-      header: 'New List',
-      inputs: [{ name: 'title', type: 'text', placeholder: 'List name' }],
+      header: listConfig ? 'Edit list' : 'New List',
+      inputs: [
+        {
+          name: 'title',
+          type: 'text',
+          value: listConfig ? listConfig.list.title : '',
+          placeholder: 'List name'
+        }
+      ],
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => console.log('cancel')
+          handler: () => listConfig.listElement.closeSlidingItems()
         },
         {
           text: 'Save',
           handler: data => {
-            if (data.title.length) {
+            if (listConfig) {
+              listConfig.list.title = data.title;
+              this.todoService.saveData();
+              listConfig.listElement.closeSlidingItems();
+            } else if (data.title.length) {
               const listId: number = this.todoService.addList(data.title);
               this.goToList(listId);
             }
