@@ -28,6 +28,11 @@ export class TodoService {
     this.storage.set('lists', this.lists);
   }
 
+  deleteList(id: number) {
+    this.lists = this.lists.filter(list => list.id !== id);
+    this.saveData();
+  }
+
   private _loadData() {
     this.storage.get('lists').then(data => {
       this.lists = data !== null ? data : [];
