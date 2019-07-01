@@ -9,8 +9,13 @@ import { List } from 'src/app/models/list.model';
 export class ListComponent {
   @Input() lists: List[];
   @Output() goTo = new EventEmitter();
+  @Output() deleteList = new EventEmitter();
 
   onClick(id: number) {
     this.goTo.emit(id);
+  }
+
+  onDelete(id: number) {
+    this.deleteList.emit(id);
   }
 }
